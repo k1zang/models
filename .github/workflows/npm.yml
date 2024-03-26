@@ -13,7 +13,6 @@ jobs:
         with:
           node-version: "14"
           registry-url: "https://registry.npmjs.org"
-      - run: npm ci
       - run: npm version patch -m "Upgrade to %s"
       - run: npm publish
         env:
