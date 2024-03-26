@@ -4,7 +4,11 @@ A powerful tool designed to simplify data fetching in a model-driven way, using 
 
 ```bash
 npm install @k1zang/models
-# or
+```
+
+or
+
+```bash
 yarn add @k1zang/models
 ```
 
@@ -44,3 +48,14 @@ const user = await User.gql(`query { user { id name } }`).query();
 ```
 
 Note: refer to the source code and comments for more detailed information about each method and how to use them.
+
+## Contributing
+
+Pull requests are welcome.
+For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
