@@ -2,12 +2,13 @@
   "name": "@k1zang/models",
   "version": "1.0.0",
   "private": false,
-  "publishConfig": { "access": "public" },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "index.ts",
   "dependencies": {
     "@apollo/client": "latest",
     "@apollo/server": "latest",
-    "@k1/requests": "0.0.0",
     "ajv": "^8.12.0",
     "graphql": "^16.6.0"
   },
