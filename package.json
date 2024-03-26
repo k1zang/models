@@ -7,8 +7,8 @@
   },
   "main": "index.ts",
   "dependencies": {
-    "@apollo/client": "latest",
-    "@apollo/server": "latest",
+    "@apollo/client": "^3.9.9",
+    "@apollo/server": "^4.10.2",
     "ajv": "^8.12.0",
     "graphql": "^16.6.0"
   },
