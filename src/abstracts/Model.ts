@@ -29,7 +29,7 @@ export default abstract class Model {
    * @memberof Resource
    * @default "graphql"
    */
-  public static mode: "rest" | "graphql" | "local";
+  public static mode: "rest" | "graphql" | "local" = "graphql";
 
   /**
    * The attribute bag of the model

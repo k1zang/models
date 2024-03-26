@@ -19,7 +19,6 @@ import Model from "@k1zang/models";
 
 class User extends Model {
   static apiUri = "http://loaclhost:8000/graphql";
-  static mode = "graphql"; // or 'rest', 'local'
 }
 ```
 
