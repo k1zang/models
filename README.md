@@ -22,7 +22,8 @@ class User extends Model {
 }
 ```
 
-This tool is designed for professionals who require flexibility. Simply override the components you need to customize.
+Designed for professionals who require flexibility.
+Simply override the components you need to customize.
 
 ## Usage
 
