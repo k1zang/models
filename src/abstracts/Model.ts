@@ -1,7 +1,7 @@
-import { types } from "../..";
+import { types } from "..";
 // import RestManager from "../services/resource/managers/Rest";
 import GqlManager from "../services/resource/managers/Graphql";
-import LocalManager from "../services/resource/managers/Local";
+// import LocalManager from "../services/resource/managers/Local";
 
 export default abstract class Model {
   [key: string]: any;
@@ -55,7 +55,7 @@ export default abstract class Model {
    */
   protected static managers = {
     graphql: GqlManager,
-    local: LocalManager,
+    // local: LocalManager,
   };
 
   /**
@@ -150,19 +150,19 @@ export default abstract class Model {
    * @param {object} query
    * @returns {Promise<Model>}
    */
-  static async first(query?: types.Query | number | string): Promise<Model> {
-    let resource: any;
+  // static async first(query?: types.Query | number | string): Promise<Model> {
+  //   let resource: any;
 
-    if (typeof query === "string" || typeof query === "number")
-      query = { where: { id: Number(query) } };
+  //   if (typeof query === "string" || typeof query === "number")
+  //     query = { where: { id: Number(query) } };
 
-    try {
-      resource = (await this.index(query))[0];
-    } catch (e) {
-      // try to fetch the resource from the server like .../models/{id}
-    }
-    return this.build(resource);
-  }
+  //   try {
+  //     resource = (await this.index(query))[0];
+  //   } catch (e) {
+  //     // try to fetch the resource from the server like .../models/{id}
+  //   }
+  //   return this.build(resource);
+  // }
 
   /**
    * Builds the model with the given model name
@@ -208,7 +208,7 @@ export default abstract class Model {
     if (!(this.resourceManager instanceof GqlManager))
       throw new Error("Cannot use gql in non-graphql mode");
 
-    const process = async (method, args) => {
+    const process = async (method: string, args: any) => {
       let result = (await (this.resourceManager as GqlManager)
         .execute(method, args, query)); // prettier-ignore
       return this.autoBuild(result.data[Object.keys(result.data)[0]], this);

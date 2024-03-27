@@ -1,6 +1,6 @@
 import Ajv from "ajv";
-import Request from "@k1/requests";
-import { types } from "../../../..";
+// import Request from "@k1/requests";
+import { types } from "../../..";
 import Query from "../Query";
 
 export default class LocalResource {
@@ -16,12 +16,12 @@ export default class LocalResource {
     return queries ? this.query(queries) : this.stack;
   }
 
-  async update(attributes: object, id = null) {
-    // asign all models id to in stack to identify them
-    const index = this.stack.indexOf((r: Request) => r.id === id);
-    // if (index >= 0) this.stack[index] = response;
-    return this;
-  }
+  // async update(attributes: object, id = null) {
+  //   // asign all models id to in stack to identify them
+  //   const index = this.stack.indexOf((r: Request) => r.id === id);
+  //   // if (index >= 0) this.stack[index] = response;
+  //   return this;
+  // }
 
   async destroy(id = null) {
     if (id) this.stack[id] = this.stack.filter((r: any) => r.id !== id);

@@ -1,11 +1,15 @@
 {
   "name": "@k1zang/models",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": false,
   "publishConfig": {
     "access": "public"
   },
-  "main": "index.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "dependencies": {
     "@apollo/client": "^3.9.9",
     "@apollo/server": "^4.10.2",

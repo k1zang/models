@@ -1,10 +1,9 @@
 import { gql } from "@apollo/client/core";
-import { types } from "../../../..";
+import { types } from "../../..";
 import Query from "../Query";
 import { ApolloClient, InMemoryCache } from "@apollo/client/core";
 
 export default class GraphqlResource {
-  apiUri: string;
   client: ApolloClient<any>;
 
   constructor(apiUri: string) {
@@ -12,7 +11,7 @@ export default class GraphqlResource {
   }
 
   execute(method: string, args: any, query: string = "") {
-    return this.client[method]({
+    return (this.client as any)[method]({
       [{
         query: "query",
         mutate: "mutation",
@@ -41,7 +40,6 @@ export default class GraphqlResource {
     //     })
     //   ).json()
     // ).data;
-    return Query.toGql(queries);
   }
 
   static provider(uri: string) {

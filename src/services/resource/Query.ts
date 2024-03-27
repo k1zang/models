@@ -1,5 +1,5 @@
 import { DocumentNode, gql } from "@apollo/client/core";
-import { types } from "../../..";
+import { types } from "../..";
 
 export default class Query {
   stack: types.query.Stack;
@@ -82,13 +82,5 @@ export default class Query {
     b: types.query.WhereValue
   ): boolean {
     return this.operators[operator](a, b);
-  }
-
-  static toGql(queries: types.Query): DocumentNode {
-    return gql(
-      `query { ${Object.keys(queries).map(
-        (key) => `${key} { ${Query.toGql(queries[key])} }`
-      )} }`
-    );
   }
 }

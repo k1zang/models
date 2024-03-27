@@ -13,10 +13,10 @@ jobs:
         with:
           node-version: "14"
           registry-url: "https://registry.npmjs.org"
-      # - name: Set git user
-      #   run: |
-      #     git config --global user.email "actions@github.com"
-      #     git config --global user.name "GitHub Actions"
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npx tsc
       # - run: npm version patch -m "Upgrade to %s"
       - run: npm publish
         env:
