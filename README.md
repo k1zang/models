@@ -2,6 +2,8 @@ A powerful tool designed to simplify data fetching in a model-driven way, using 
 
 ## Installation
 
+First have your graphql server prepared then:
+
 ```bash
 npm install @k1zang/models
 ```
@@ -15,10 +17,16 @@ yarn add @k1zang/models
 Import and setup
 
 ```typescript
-import Model from "@k1zang/models";
+import Model as BaseModel from "@k1zang/models";
 
-class User extends Model {
+class Model extends BaseModel {
   static apiUri = "http://loaclhost:8000/graphql";
+}
+
+class CartModel extends Model {}
+
+class UserModel extends Model {
+  static relations = { cart: CartModel }
 }
 ```
 
@@ -27,12 +35,17 @@ Simply override the components you need to customize.
 
 ## Usage
 
-You can then use the methods provided by the Model class to interact with your User model:
+**With Graphql**
+The gql method returns the Apollo client api
 
 ```typescript
-// Fetch the first user
-const user = await User.first();
+const user = await User.gql`query { user { cart { id } } }`.query();
+```
 
+**Too complicated? use Abstract api**
+you can then use the methods provided by the Model class to interact with your User model:
+
+```typescript
 // Fetch all users
 const users = await User.all();
 
@@ -41,10 +54,12 @@ const newUser = await User.create({
   name: "John Doe",
   email: "john.doe@example.com",
 });
+```
 
-// Graphql queries
-const user = await User.gql(`query { user { id name } }`).query();
-// gql method returns the Apollo client api
+**Relations are automatically resolved**
+
+```typescript
+(await User.first()).cart; // CartModel instance
 ```
 
 Note: refer to the source code and comments for more detailed information about each method and how to use them.
