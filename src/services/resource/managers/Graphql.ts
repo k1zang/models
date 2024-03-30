@@ -10,7 +10,11 @@ export default class GraphqlResource {
     this.client = (this.constructor as any).provider(apiUri);
   }
 
-  execute(method: string, args: any, query: string = "") {
+  execute(
+    method: string,
+    args: any,
+    query: string | TemplateStringsArray = ""
+  ) {
     return (this.client as any)[method]({
       [{
         query: "query",

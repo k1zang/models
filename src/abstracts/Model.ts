@@ -204,7 +204,7 @@ export default abstract class Model {
     return this[r instanceof Array ? "buildMany" : "build"](r, m);
   }
 
-  static gql(query?: string) {
+  static gql(query?: string | TemplateStringsArray) {
     if (!(this.resourceManager instanceof GqlManager))
       throw new Error("Cannot use gql in non-graphql mode");
 
