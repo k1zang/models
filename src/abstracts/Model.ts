@@ -78,11 +78,11 @@ export default abstract class Model {
   }
 
   /**
-   * Returns the json schema for the model and
+   * Returns the json/graphql schema for the model and
    * must be overridden by the subclass
-   * @returns {object}
+   * @returns {object|string|TemplateStringsArray}
    */
-  static schema(): object {
+  static schema(): object | string | TemplateStringsArray {
     throw new Error(`Model "${this.name}" has no schema`);
   }
 
