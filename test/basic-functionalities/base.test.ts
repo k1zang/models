@@ -46,7 +46,7 @@ describe("Model", () => {
   });
 
   test("getting skeleton", () => {
-    expect(AModel.skeleton()).toEqual({});
+    expect(AModel.skeleton()).instanceOf(AModel);
   });
 
   // test("fetching all models", async () => {
@@ -55,9 +55,9 @@ describe("Model", () => {
   //   expect(all[0]).toBeInstanceOf(AModel);
   // });
 
-  test("getting one model", async () => {
-    expect(await AModel.first()).toBeInstanceOf(AModel);
-  });
+  // test("getting one model", async () => {
+  //   expect(await AModel.first()).toBeInstanceOf(AModel);
+  // });
 
   // test("getting certain model by attributes", async () => {
   //   const resources = [

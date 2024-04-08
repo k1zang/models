@@ -64,8 +64,9 @@ export default abstract class Model {
    * before it was fetched from the server
    * @returns {object}
    */
-  static skeleton(): object {
-    return {};
+  static skeleton(): Model {
+    // @ts-ignore
+    return new this();
   }
 
   /**

@@ -55,7 +55,7 @@ export default abstract class Model {
      * before it was fetched from the server
      * @returns {object}
      */
-    static skeleton(): object;
+    static skeleton(): Model;
     /**
      * Returns the definition for the model
      * must be implemented by the subclass
@@ -63,11 +63,11 @@ export default abstract class Model {
      */
     static definition(): object;
     /**
-     * Returns the json schema for the model and
+     * Returns the json/graphql schema for the model and
      * must be overridden by the subclass
-     * @returns {object}
+     * @returns {object|string|TemplateStringsArray}
      */
-    static schema(): object;
+    static schema(): object | string | TemplateStringsArray;
     /**
      * Returns the resource source for the model
      * @returns {array}
@@ -133,7 +133,7 @@ export default abstract class Model {
      * @returns {Model | Model[]}
      */
     static autoBuild(r: any, m: typeof Model): Model | Model[];
-    static gql(query?: string): {
+    static gql(query?: string | TemplateStringsArray): {
         query: (options?: import("@apollo/client/core").QueryOptions<import("@apollo/client/core").OperationVariables, unknown> | undefined) => types.QueryReturnType;
     };
     /**

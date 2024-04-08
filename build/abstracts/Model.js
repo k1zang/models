@@ -14,7 +14,8 @@ class Model {
      * @returns {object}
      */
     static skeleton() {
-        return {};
+        // @ts-ignore
+        return new this();
     }
     /**
      * Returns the definition for the model
@@ -25,9 +26,9 @@ class Model {
         throw new Error("Must be implemented by subclass");
     }
     /**
-     * Returns the json schema for the model and
+     * Returns the json/graphql schema for the model and
      * must be overridden by the subclass
-     * @returns {object}
+     * @returns {object|string|TemplateStringsArray}
      */
     static schema() {
         throw new Error(`Model "${this.name}" has no schema`);
