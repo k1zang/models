@@ -62,7 +62,7 @@ export default abstract class Model {
    * Returns the skeleton for the model
    * used for visually representing the model
    * before it was fetched from the server
-   * @returns {object}
+   * @returns {Model}
    */
   static skeleton(): Model {
     // @ts-ignore

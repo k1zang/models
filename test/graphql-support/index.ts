@@ -13,8 +13,14 @@ export const { url } = await startStandaloneServer(
     schema: addMocksToSchema({
       schema: makeExecutableSchema({ typeDefs }),
       mocks: {
-        AModel: () => AModel.definition(),
-        BModel: () => BModel.definition(),
+        Query: () => ({
+          aModel: (args) => AModel.definition(args?.id),
+          bModel: (args) => BModel.definition(args?.id),
+          aModels: () =>
+            new Array(10).fill(null).map((args) => AModel.definition(args?.id)),
+          bModels: () =>
+            new Array(10).fill(null).map((args) => BModel.definition(args?.id)),
+        }),
       },
     }),
   })
@@ -45,9 +51,9 @@ abstract class BaseModel extends Abstract {
 }
 
 export class BModel extends BaseModel {
-  static definition() {
+  static definition(id?: null | Number) {
     return {
-      id: Math.round(Math.random() * 10),
+      id: id ?? Math.round(Math.random() * 10),
       attr: "attr",
     };
   }
@@ -58,9 +64,9 @@ export class AModel extends BaseModel {
     bModels: BModel,
   };
 
-  static definition() {
+  static definition(id?: null | Number) {
     return {
-      id: Math.round(Math.random() * 10),
+      id: id ?? Math.round(Math.random() * 10),
       prop: "prop",
     };
   }
