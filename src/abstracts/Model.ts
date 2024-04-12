@@ -4,8 +4,6 @@ import GqlManager from "../services/resource/managers/Graphql";
 // import LocalManager from "../services/resource/managers/Local";
 
 export default abstract class Model {
-  [key: string]: object | string | number | boolean | Array<any> | Model;
-
   /**
    * Define the relations of the model
    * @type {object}
@@ -266,7 +264,7 @@ export default abstract class Model {
    */
   setAttributes(attributes: { [key: string]: any }) {
     attributes = this.resolveRelations(attributes);
-    for (const key in attributes) this[key] = attributes[key];
+    for (const key in attributes) (this as any)[key] = attributes[key];
     return this;
   }
 

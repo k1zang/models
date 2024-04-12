@@ -44,7 +44,7 @@ Simply override the components you need to customize.
 The gql method returns the Apollo client api
 
 ```typescript
-const user = await User.gql`query { user { cart { id } } }`.query();
+const user = await UserModel.gql`query { user { cart { id } } }`.query();
 ```
 
 **Too complicated? use Abstracted api;**
@@ -52,10 +52,10 @@ Use methods provided by the Model class to interact with your models:
 
 ```typescript
 // Fetch all users
-const users = await User.all();
+const users = await UserModel.all();
 
 // Create a new user
-const newUser = await User.create({
+const newUser = await UserModel.create({
   name: "John Doe",
 });
 ```
@@ -63,7 +63,7 @@ const newUser = await User.create({
 **Relations are automatically resolved**
 
 ```typescript
-(await User.first()).cart; // CartModel instance
+(await UserModel.first()).cart; // CartModel instance
 ```
 
 Note: refer to the source code and comments for more detailed information about each method and how to use them.
