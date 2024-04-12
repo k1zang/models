@@ -47,8 +47,8 @@ The gql method returns the Apollo client api
 const user = await User.gql`query { user { cart { id } } }`.query();
 ```
 
-**Too complicated? use Abstract api**
-you can then use the methods provided by the Model class to interact with your User model:
+**Too complicated? use Abstracted api;**
+Use methods provided by the Model class to interact with your models:
 
 ```typescript
 // Fetch all users
