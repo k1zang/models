@@ -6,7 +6,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "test": "vitest"
   },
   "main": "build/index.js",
   "types": "build/index.d.ts",

@@ -1,7 +1,6 @@
 import { types } from "..";
 import GqlManager from "../services/resource/managers/Graphql";
 export default abstract class Model {
-    [key: string]: any;
     /**
      * Define the relations of the model
      * @type {object}
@@ -27,11 +26,6 @@ export default abstract class Model {
      */
     static mode: "rest" | "graphql" | "local";
     /**
-     * The attribute bag of the model
-     * @type {Record<string, any>}
-     */
-    _attributes: Record<string, any>;
-    /**
      * The resource manager for the model
      * @type {types.ResourceManager}
      * @protected
@@ -53,7 +47,7 @@ export default abstract class Model {
      * Returns the skeleton for the model
      * used for visually representing the model
      * before it was fetched from the server
-     * @returns {object}
+     * @returns {Model}
      */
     static skeleton(): Model;
     /**
@@ -167,14 +161,5 @@ export default abstract class Model {
     setAttributes(attributes: {
         [key: string]: any;
     }): this;
-    get attributes(): any;
-    set attributes(attrs: any);
-    get static(): Model;
-    /**
-     * Returns the model as a proxy
-     * to allow accessing the attributes and
-     * relations directly
-     * @returns {Proxy}
-     */
-    protected asProxy(): any;
+    get static(): typeof Model;
 }

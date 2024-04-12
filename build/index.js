@@ -26,8 +26,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.types = exports.Model = void 0;
+exports.decorators = exports.types = exports.Model = void 0;
 var Model_1 = require("./abstracts/Model");
 Object.defineProperty(exports, "Model", { enumerable: true, get: function () { return __importDefault(Model_1).default; } });
 exports.types = __importStar(require("./interfaces"));
+exports.decorators = __importStar(require("./decorators"));
 //# sourceMappingURL=index.js.map

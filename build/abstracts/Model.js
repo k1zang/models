@@ -11,7 +11,7 @@ class Model {
      * Returns the skeleton for the model
      * used for visually representing the model
      * before it was fetched from the server
-     * @returns {object}
+     * @returns {Model}
      */
     static skeleton() {
         // @ts-ignore
@@ -58,13 +58,7 @@ class Model {
      * @param {object} attributes
      */
     constructor(attributes) {
-        /**
-         * The attribute bag of the model
-         * @type {Record<string, any>}
-         */
-        this._attributes = {};
         this.setAttributes({ ...attributes });
-        return this.asProxy();
     }
     static index(query) {
         return this.resourceManager.index(query);
@@ -114,8 +108,6 @@ class Model {
      * @throws {Error}
      */
     static build(resource, model = this) {
-        if (resource instanceof Model)
-            resource = resource.attributes;
         if (!this.name)
             throw new Error("Anonymous class cannot be instantiated!");
         return new (model !== null && model !== void 0 ? model : this)(resource);
@@ -205,34 +197,13 @@ class Model {
      * @returns {RelationalModel}
      */
     setAttributes(attributes) {
-        this.attributes = this.resolveRelations(attributes);
+        attributes = this.resolveRelations(attributes);
+        for (const key in attributes)
+            this[key] = attributes[key];
         return this;
-    }
-    get attributes() {
-        return this._attributes;
-    }
-    set attributes(attrs) {
-        this._attributes = attrs !== null && attrs !== void 0 ? attrs : {};
     }
     get static() {
         return this.constructor;
-    }
-    /**
-     * Returns the model as a proxy
-     * to allow accessing the attributes and
-     * relations directly
-     * @returns {Proxy}
-     */
-    asProxy() {
-        return new Proxy(this, {
-            get(target, prop, receiver) {
-                if (Reflect.has(target, prop))
-                    return Reflect.get(target, prop, receiver);
-                if (Reflect.has(target.attributes, prop))
-                    return Reflect.get(target.attributes, prop, receiver);
-                return Reflect.get(target, prop, receiver);
-            },
-        });
     }
 }
 /**
