@@ -4,6 +4,8 @@ import GqlManager from "../services/resource/managers/Graphql";
 // import LocalManager from "../services/resource/managers/Local";
 
 export default abstract class Model {
+  [key: string]: object | string | number | boolean | Array<any> | Model;
+
   /**
    * Define the relations of the model
    * @type {object}
@@ -28,12 +30,6 @@ export default abstract class Model {
    * @default "graphql"
    */
   public static mode: "rest" | "graphql" | "local" = "graphql";
-
-  /**
-   * The attribute bag of the model
-   * @type {Record<string, any>}
-   */
-  public _attributes: Record<string, any> = {};
 
   /**
    * The resource manager for the model
@@ -114,7 +110,6 @@ export default abstract class Model {
    */
   constructor(attributes?: { [key: string]: any }) {
     this.setAttributes({ ...attributes });
-    return this.asProxy();
   }
 
   static index(query?: types.Query) {
@@ -172,7 +167,6 @@ export default abstract class Model {
    * @throws {Error}
    */
   static build(resource: object, model: typeof Model | any = this): Model {
-    if (resource instanceof Model) resource = resource.attributes;
     if (!this.name) throw new Error("Anonymous class cannot be instantiated!");
     return new ((model ?? this) as any)(resource);
   }
@@ -271,39 +265,12 @@ export default abstract class Model {
    * @returns {RelationalModel}
    */
   setAttributes(attributes: { [key: string]: any }) {
-    this.attributes = this.resolveRelations(attributes);
+    attributes = this.resolveRelations(attributes);
+    for (const key in attributes) this[key] = attributes[key];
     return this;
-  }
-
-  public get attributes() {
-    return this._attributes;
-  }
-
-  public set attributes(attrs: any) {
-    this._attributes = attrs ?? {};
   }
 
   get static() {
     return this.constructor as typeof Model;
-  }
-
-  /**
-   * Returns the model as a proxy
-   * to allow accessing the attributes and
-   * relations directly
-   * @returns {Proxy}
-   */
-  protected asProxy() {
-    return new Proxy(this, {
-      get(target: any, prop, receiver) {
-        if (Reflect.has(target, prop))
-          return Reflect.get(target, prop, receiver);
-
-        if (Reflect.has(target.attributes, prop))
-          return Reflect.get(target.attributes, prop, receiver);
-
-        return Reflect.get(target, prop, receiver);
-      },
-    });
   }
 }

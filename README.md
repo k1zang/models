@@ -17,16 +17,21 @@ yarn add @k1zang/models
 Import and setup
 
 ```typescript
-import Model as BaseModel from "@k1zang/models";
+import BaseModel, { decorators } from "@k1zang/models";
 
-class Model extends BaseModel {
+abstract class AbstractModel extends BaseModel {
   static apiUri = "http://loaclhost:8000/graphql";
 }
 
-class CartModel extends Model {}
+class CartModel extends AbstractModel {
+  id?: number;
+}
 
-class UserModel extends Model {
-  static relations = { cart: CartModel }
+class UserModel extends AbstractModel {
+  name?: string = "";
+
+  @decorators.RelationOneToOne(CartModel)
+  cart?: CartModel;
 }
 ```
 
@@ -52,7 +57,6 @@ const users = await User.all();
 // Create a new user
 const newUser = await User.create({
   name: "John Doe",
-  email: "john.doe@example.com",
 });
 ```
 

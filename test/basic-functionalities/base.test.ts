@@ -6,7 +6,7 @@ import CModel from "./models/CModel";
 describe("Model", () => {
   test("passed attributes are set on attributes bag", () => {
     let a = new AModel(AModel.definition());
-    expect(a.attributes).toEqual(AModel.definition());
+    expect(a).toEqual(AModel.definition());
   });
 
   test("can access the attrs bag and relations directly", () => {
@@ -15,12 +15,12 @@ describe("Model", () => {
       bModel: BModel.definition(),
     });
     expect(a.firstname).toEqual("firstname");
-    expect(a.bModel.attributes).toEqual(BModel.definition());
+    expect(a.bModel).toEqual(BModel.definition());
   });
 
   test("passing attributes under 'attribute' key is not necessary", () => {
     let a = new AModel(AModel.definition());
-    expect(a.attributes).toEqual(AModel.definition());
+    expect(a).toEqual(AModel.definition());
   });
 
   test("relation auto resolution with array", () => {
@@ -35,13 +35,13 @@ describe("Model", () => {
 
   test("passed json relations get converted to native object models", () => {
     let a = new AModel({
-      attributes: AModel.definition(),
+      ...AModel.definition(),
       bModel: BModel.definition(),
       cModels: [CModel.definition(), CModel.definition()],
     });
-    expect(a.bModel.attributes).toEqual(BModel.definition());
+    expect(a.bModel).toEqual(BModel.definition());
     expect(a.bModel).toBeInstanceOf(BModel);
-    expect(a.cModels[0].attributes).toEqual(CModel.definition());
+    expect(a.cModels[0]).toEqual(CModel.definition());
     expect(a.cModels[0]).toBeInstanceOf(CModel);
   });
 
