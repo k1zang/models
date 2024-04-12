@@ -2,6 +2,10 @@ import Model from "./Model";
 import BModel from "./BModel";
 import CModel from "./CModel";
 export default class AModel extends Model {
+  firstname: string;
+  bModel: BModel;
+  cModels: CModel[];
+
   static relations = {
     bModel: BModel,
     cModels: CModel,

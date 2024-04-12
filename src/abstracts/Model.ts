@@ -4,8 +4,6 @@ import GqlManager from "../services/resource/managers/Graphql";
 // import LocalManager from "../services/resource/managers/Local";
 
 export default abstract class Model {
-  [key: string]: any;
-
   /**
    * Define the relations of the model
    * @type {object}
@@ -286,7 +284,7 @@ export default abstract class Model {
   }
 
   get static() {
-    return this.constructor as unknown as Model;
+    return this.constructor as typeof Model;
   }
 
   /**

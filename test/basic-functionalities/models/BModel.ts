@@ -1,6 +1,8 @@
 import Model from "./Model";
 
 export default class BModel extends Model {
+  nickname: string;
+
   static definition() {
     return { nickname: "nickname" };
   }
