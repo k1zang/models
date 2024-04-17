@@ -2,6 +2,7 @@ import { describe, expect, test, beforeEach } from "vitest";
 import AModel from "./models/AModel";
 import BModel from "./models/BModel";
 import CModel from "./models/CModel";
+import Model from "./models/Model";
 
 describe("Model", () => {
   test("passed attributes are set on attributes bag", () => {
@@ -45,8 +46,8 @@ describe("Model", () => {
     expect(a.cModels[0]).toBeInstanceOf(CModel);
   });
 
-  test("getting skeleton", () => {
-    expect(AModel.skeleton()).instanceOf(AModel);
+  test("making a skeleton", () => {
+    expect(new AModel()).instanceOf(AModel);
   });
 
   // test("fetching all models", async () => {
@@ -88,6 +89,25 @@ describe("Model", () => {
     checkProperty(a.bModel, "nickname", bDef.nickname);
     checkProperty(a.cModels[0], "lastname", cDef.lastname);
     checkProperty(a.cModels[1], "lastname", cDef.lastname);
+  });
+
+  test("resolves nested relation types in attributes", () => {
+    class DModel extends Model {
+      aModel: AModel;
+      static relations = {
+        aModel: AModel,
+      };
+    }
+    let d = new DModel({
+      aModel: {
+        ...AModel.definition(),
+        bModel: BModel.definition(),
+        cModels: [CModel.definition(), CModel.definition()],
+      },
+    });
+    expect(d.aModel).toBeInstanceOf(AModel);
+    expect(d.aModel.bModel).toBeInstanceOf(BModel);
+    expect(d.aModel.cModels[0]).toBeInstanceOf(CModel);
   });
 });
 

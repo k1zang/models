@@ -8,7 +8,7 @@ export default abstract class Model {
    * Define the relations of the model
    * @type {object}
    */
-  static relations: { [ket: string]: typeof Model } = {};
+  static relations: { [ket: string]: typeof Model };
 
   /**
    * The base uri for the model
@@ -49,17 +49,6 @@ export default abstract class Model {
     graphql: GqlManager,
     // local: LocalManager,
   };
-
-  /**
-   * Returns the skeleton for the model
-   * used for visually representing the model
-   * before it was fetched from the server
-   * @returns {Model}
-   */
-  static skeleton(): Model {
-    // @ts-ignore
-    return new this();
-  }
 
   /**
    * Returns the definition for the model
