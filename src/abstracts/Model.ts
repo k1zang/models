@@ -95,8 +95,8 @@ export default abstract class Model {
   /**
    * @param {object} attributes
    */
-  constructor(attributes?: { [key: string]: any }) {
-    this.setAttributes({ ...attributes });
+  constructor(attributes: { [key: string]: any } = {}) {
+    this.setAttributes(attributes);
   }
 
   static index(query?: types.Query) {
@@ -253,7 +253,8 @@ export default abstract class Model {
    */
   setAttributes(attributes: { [key: string]: any }) {
     attributes = this.resolveRelations(attributes);
-    for (const key in attributes) (this as any)[key] = attributes[key];
+    // for (const key in attributes) (this as any)[key] = attributes[key];
+    Object.assign(this, attributes);
     return this;
   }
 

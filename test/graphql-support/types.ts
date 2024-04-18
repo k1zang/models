@@ -8,6 +8,11 @@ export default `#graphql
   type BModel {
     id: Int
     attr: String
+    cModel: CModel
+  }
+
+  type CModel {
+    foo: String
   }
 
   type Query {

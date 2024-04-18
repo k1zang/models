@@ -1,6 +1,6 @@
 {
   "name": "@k1zang/models",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -15,13 +15,17 @@
     "@apollo/client": "^3.9.9",
     "@apollo/server": "^4.10.2",
     "ajv": "^8.12.0",
-    "graphql": "^16.6.0"
+    "graphql": "^16.6.0",
+    "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
     "@graphql-tools/mock": "^9.0.2",
     "@graphql-tools/schema": "^10.0.3",
     "msw": "^2.2.1",
-    "typescript": "^5.1.6",
-    "vitest": "^0.34.6"
+    "vitest": "^0.34.6",
+    "typescript": "*"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   }
 }

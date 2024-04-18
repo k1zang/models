@@ -1,15 +1,17 @@
 import Model from "./abstracts/Model";
 
-export function relationOneToOne(relative: typeof Model) {
-  return function (model: any, property: any) {
-    if (!model.constructor.relations) model.constructor.relations = {};
-    model.constructor.relations[property] = relative;
+export function oneToOne(relative: typeof Model) {
+  // if (aeg2 is context) handle legacy or check for experimental option
+  // else handle proposal stage 3
+  return function (target: any, property: any) {
+    if (!target.constructor.relations) target.constructor.relations = {};
+    target.constructor.relations[property] = relative;
   };
 }
 
-export function relationOneToMany(relative: typeof Model) {
-  return function (model: any, property: any) {
-    if (!model.constructor.relations) model.constructor.relations = {};
-    model.constructor.relations[property] = relative;
-  };
-}
+const relation = {
+  oneToOne,
+  oneToMany: oneToOne,
+};
+
+export default relation;

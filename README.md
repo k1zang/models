@@ -14,24 +14,36 @@ or
 yarn add @k1zang/models
 ```
 
-Import and setup
+Import and setup models
 
 ```typescript
-import BaseModel, { decorators } from "@k1zang/models";
+import BaseModel, { relation } from "@k1zang/models";
 
 abstract class AbstractModel extends BaseModel {
   static apiUri = "http://loaclhost:8000/graphql";
 }
 
 class CartModel extends AbstractModel {
-  id?: number;
+  public id?: number;
 }
 
 class UserModel extends AbstractModel {
-  name?: string = "";
+  public name?: string = "";
 
-  @decorators.RelationOneToOne(CartModel)
-  cart?: CartModel;
+  @relation.oneToOne(CartModel)
+  public cart?: CartModel;
+}
+```
+
+Not preferring typescript? then:
+
+```javascript
+class UserModel {
+  name = "";
+
+  static relations = {
+    cart: CartModel,
+  };
 }
 ```
 

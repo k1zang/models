@@ -1,16 +1,16 @@
 import { test, expect, describe } from "vitest";
 import Abstract from "../src/abstracts/Model";
-import { relationOneToMany, relationOneToOne } from "../src/decorators";
+import relation from "../src/decorators";
 
 class BModel extends Abstract {}
 
 class CModel extends Abstract {}
 
 class AModel extends Abstract {
-  @relationOneToOne(BModel)
+  @relation.oneToOne(BModel)
   bModel: BModel;
 
-  @relationOneToMany(CModel)
+  @relation.oneToMany(CModel)
   cModels: CModel[];
 }
 
@@ -28,7 +28,7 @@ describe("AModel should have correct relations", () => {
 
   test("resolves deeply nested relation, single", () => {
     class DModel extends Abstract {
-      @relationOneToOne(AModel)
+      @relation.oneToOne(AModel)
       aModel: AModel;
     }
     let d = new DModel({
@@ -47,13 +47,13 @@ describe("AModel should have correct relations", () => {
     expect(YModel.relations).toStrictEqual({ aModel: AModel });
     expect(Abstract.relations).toBe(undefined);
     class XModel extends Abstract {
-      @relationOneToOne(YModel)
+      @relation.oneToOne(YModel)
       yModel: YModel;
     }
     expect(XModel.relations).toStrictEqual({ yModel: YModel });
     expect(Abstract.relations).toBe(undefined);
     class ZModel extends Abstract {
-      @relationOneToOne(XModel)
+      @relation.oneToOne(XModel)
       xModel: XModel;
     }
     expect(ZModel.relations).toStrictEqual({ xModel: XModel });
@@ -63,7 +63,7 @@ describe("AModel should have correct relations", () => {
     expect(Abstract.relations).toStrictEqual(undefined);
 
     class DModel extends Abstract {
-      @relationOneToMany(AModel)
+      @relation.oneToMany(AModel)
       aModels: AModel[];
     }
 
@@ -72,7 +72,7 @@ describe("AModel should have correct relations", () => {
 
   test("resolves deeply nested relation, multiple", () => {
     class DModel extends Abstract {
-      @relationOneToMany(AModel)
+      @relation.oneToMany(AModel)
       aModels: AModel[];
     }
     let d = new DModel({
