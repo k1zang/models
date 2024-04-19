@@ -39,8 +39,8 @@ Not preferring typescript? then:
 
 ```javascript
 class UserModel {
-  name = "";
-
+  // ...
+  cart;
   static relations = {
     cart: CartModel,
   };

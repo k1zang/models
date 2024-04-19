@@ -96,7 +96,7 @@ export default abstract class Model {
    * @param {object} attributes
    */
   constructor(attributes: { [key: string]: any } = {}) {
-    this.setAttributes(attributes);
+    this.setAttributes({ ...attributes });
   }
 
   static index(query?: types.Query) {

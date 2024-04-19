@@ -1,6 +1,6 @@
 import Model from "./abstracts/Model";
 
-export function oneToOne(relative: typeof Model) {
+function oneToOne(relative: typeof Model) {
   // if (aeg2 is context) handle legacy or check for experimental option
   // else handle proposal stage 3
   return function (target: any, property: any) {

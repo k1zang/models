@@ -109,6 +109,10 @@ describe("Model", () => {
     expect(d.aModel.bModel).toBeInstanceOf(BModel);
     expect(d.aModel.cModels[0]).toBeInstanceOf(CModel);
   });
+
+  test("passing readonly attributes", () => {
+    new AModel(Object.freeze(AModel.definition()));
+  });
 });
 
 function checkProperty(obj, prop, value) {
